@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    font-family: Tahoma;
 }
 
 .wrap {
@@ -113,3 +114,82 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: Tahoma;
+}
+
+.main-header .logo {
+  -webkit-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  display: block;
+  float: left;
+  height: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  width: 230px;
+  font-family: Tahoma;
+  padding: 0 15px;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+.widget-user .widget-user-username {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 300;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profil-title {
+    margin-top: 18px;
+    margin-bottom: 0px;
+    text-align: left;
+    font-size: 15px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profil-desc {
+    margin-top: 0px;
+    text-align: right;
+    color: #2b78ac;
+    font-size: 15px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 15px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.danger {
+    color: #ca2915 !important;
+}
+
+.border-left {
+    border-right: 1px solid #ecf0f5 !important;
+}
+
+.profil {
+    color: #2b78ac;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profil-text {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+

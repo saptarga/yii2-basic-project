@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserManajemenSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,18 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="col-md-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">List User</h3>
+        <h3 class="box-title"><i class="fa fa-list-alt" aria-hidden="true"></i> List User</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
           <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
       </div>
-      <div class="box-body">
+      <div class="box-body"> 
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'tableOptions' => ['class' => 'table  table-bordered table-hover'],
+        'tableOptions' => ['class' => 'table  table-striped table-hover'],
+        'options' => ['class' => 'table-responsive'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'username',
@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'headerOptions' => ['width' => '80'],
-                'template' => '{action}',
+                'headerOptions' => ['width' => '180'],
+                'template' => '{action} {profile}',
                 'buttons' => [
                     'action' => function ($url,$model) {
                         if ($model->status == 10){
@@ -67,7 +67,12 @@ $this->params['breadcrumbs'][] = $this->title;
                              ['active', 'id'=>$model->id], ['class' => 'btn btn-success user-active']);
                         }
                         
-                    },                          
+                    },
+                    'profile' => function ($url,$model) {
+                            return Html::a(
+                            'Profile', 
+                             ['profile', 'id'=>$model->id], ['class' => 'btn btn-info']);
+                    },                            
                 ],
             ],
         ],

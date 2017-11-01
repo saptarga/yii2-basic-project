@@ -18,8 +18,9 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/AdminLTE.css',
         'css/site.css',
-        'css/dbtable.css'
+        'css/dbtable.css',
     ];
     public $js = [
         'js/bootbox.min.js',

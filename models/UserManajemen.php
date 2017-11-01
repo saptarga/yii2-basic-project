@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\models\Profile;
 /**
  * This is the model class for table "user".
  *
@@ -59,5 +59,10 @@ class UserManajemen extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 }

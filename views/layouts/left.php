@@ -33,7 +33,7 @@
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'User Manajemen', 'icon' => 'user-plus', 'url' => ['/user-manajemen/']],
+                    ['label' => 'User Manajemen', 'icon' => 'users', 'url' => ['/user-manajemen/']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                 ],
             ]

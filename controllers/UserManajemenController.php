@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\SignupForm;
 
 /**
  * UserManajemenController implements the CRUD actions for UserManajemen model.
@@ -25,11 +26,11 @@ class UserManajemenController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'profil','view','inactive','create','delete','active'],
+                        'actions' => ['index','view','inactive','create','delete','active'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'profil','view','inactive','create','delete','active'],
+                        'actions' => ['index','view','inactive','create','delete','active'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -78,34 +79,17 @@ class UserManajemenController extends Controller
      */
     public function actionCreate()
     {
-        $model = new UserManajemen();
+        $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('create', [
                 'model' => $model,
             ]);
-        }
-    }
-
-    /**
-     * Updates an existing UserManajemen model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionProfile($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
