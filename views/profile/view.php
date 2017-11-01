@@ -64,10 +64,10 @@ $this->registerJs("
               </h3>
               <h5 class="widget-user-desc">
               	<?= $model->job_desc; ?></h5>
-              <?= Html::a(Html::img('@web/img/facebook.png', ['style' => 'width:20px;']), [($model->fb == '#')? '/profile/view/#':'http://'.$model->fb]) ?>
-              <?= Html::a(Html::img('@web/img/instagram.png', ['style' => 'width:20px;']), [($model->fb == '#')? '/profile/view/#':'http://'.$model->fb]) ?>
-              <?= Html::a(Html::img('@web/img/linkedin.png', ['style' => 'width:20px;']), [($model->fb == '#')? '/profile/view/#':'http://'.$model->fb]) ?>
-              <?= Html::a(Html::img('@web/img/website.png', ['style' => 'width:20px;']), [($model->fb == '#')? '/profile/view/#':'http://'.$model->fb]) ?><br><br>
+              <a href="<?= ($model->fb == '#')? '#':'http://'.$model->fb ?>"><?= Html::img('@web/img/facebook.png', ['style' => 'width:20px;']) ?></a>
+              <a href="<?= ($model->ig == '#')? '#':'http://'.$model->ig ?>"><?= Html::img('@web/img/instagram.png', ['style' => 'width:20px;']) ?></a>
+              <a href="<?= ($model->ln == '#')? '#':'http://'.$model->ln ?>"><?= Html::img('@web/img/linkedin.png', ['style' => 'width:20px;']) ?></a>
+              <a href="<?= ($model->url == '#')? '#':'http://'.$model->url ?>"><?= Html::img('@web/img/website.png', ['style' => 'width:20px;']) ?></a><br><br>
               <?php if (RecordHelpers::userMustBeOwner('profile',$model->id)) { 
                   echo Html::a('<i class="fa fa-camera" aria-hidden="true"></i> Upload New Picture', ['update-pic'], [
                       'class' => 'btn btn-default',
@@ -192,37 +192,27 @@ $this->registerJs("
         <div class="tab-pane" id="social-media">
         	<div class="row">
 				<div class="col-md-10">
-					<form class="form-horizontal profil-text">
-					  <div class="form-group">
-					    <label for="inputName" class="col-sm-4 control-label">Facebook</label>
-					    <div class="col-sm-8">
-					      <input type="email" class="form-control" id="inputName" placeholder="Name">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputEmail" class="col-sm-4 control-label">Instagram</label>
-					    <div class="col-sm-8">
-					      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputName" class="col-sm-4 control-label">Website</label>
-					    <div class="col-sm-8">
-					      <input type="text" class="form-control" id="inputName" placeholder="Name">
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="inputName" class="col-sm-4 control-label">LinkedIn</label>
-					    <div class="col-sm-8">
-					      <input type="text" class="form-control" id="inputName" placeholder="Name">
-					    </div>
-					  </div>
+					<?php $form = ActiveForm::begin([
+                   'id'=>'changeusername-form',
+                   'action' =>['change-sosmed'],
+                    'options'=>['class'=>'form-horizontal'],
+                    'fieldConfig'=>[
+                            'template'=>"{label}\n<div class=\"col-sm-8\">
+                            {input}</div>\n<div class=\"col-sm-8 col-sm-offset-4\">
+                            {error}</div>",
+                            'labelOptions'=>['class'=>'col-sm-4 control-label'],
+                    ],
+          ]); ?>
+					  <?= $form->field($model, 'fb')->textInput() ?>
+					  <?= $form->field($model, 'ig')->textInput() ?>
+					  <?= $form->field($model, 'url')->textInput() ?>
+					  <?= $form->field($model, 'ln')->textInput() ?>
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-10">
 					      <button type="submit" class="btn btn-default">Update Social Media</button>   
 					    </div>
 					  </div>
-					</form>
+					<?php ActiveForm::end(); ?>
 				</div>
 			</div>
         </div>
@@ -231,7 +221,7 @@ $this->registerJs("
 				<div class="col-md-12">
 					<h4 class="profil danger">Delete Account</h4><hr>
 					<p>Once you delete your account, there is no going back. Please be certain.</p>
-					<?= Html::a('Delete Account', ['create'], ['class' => 'btn btn-danger']) ?>
+					<?= Html::a('Delete Account', ['/user-manajemen/inactive', 'id'=>$model->id], ['class' => 'btn btn-danger']) ?>
 				</div>
 			</div>
         </div>

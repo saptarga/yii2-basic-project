@@ -49,6 +49,7 @@ class Profile extends \yii\db\ActiveRecord
             [['public_email'], 'string', 'max' => 100],
             [['fb', 'ig', 'ln', 'url'], 'string', 'max' => 60],
             [['pic'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg','gif'], 'maxSize'=>1024*1024, 'on' => 'update-pic'],
+            [['fb', 'ig', 'ln', 'url'], 'default', 'value' => '#'],
         ];
     }
 
@@ -68,10 +69,10 @@ class Profile extends \yii\db\ActiveRecord
             'pic' => 'Pic',
             'bio' => 'Bio',
             'job_desc' => 'Job Desc',
-            'fb' => 'Fb',
-            'ig' => 'Ig',
-            'ln' => 'Ln',
-            'url' => 'Url',
+            'fb' => 'Facebook',
+            'ig' => 'Instagram',
+            'ln' => 'LinkedIn',
+            'url' => 'Website',
             'Public Email' => 'public_email',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

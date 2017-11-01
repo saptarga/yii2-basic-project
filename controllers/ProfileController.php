@@ -27,11 +27,11 @@ class ProfileController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username'],
+                        'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username','change-sosmed'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username'],
+                        'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username','change-sosmed'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -185,10 +185,7 @@ class ProfileController extends Controller
                  }
             }
         }else{
-            return $this->render('view',[
-                'model' => $model,
-                'modelPassword' => $modelPassword,
-            ]);
+             return $this->redirect(['view']);
         }
     }
 
@@ -200,17 +197,20 @@ class ProfileController extends Controller
         
         if ($modelUser->load(Yii::$app->request->post()) && $modelUser->save()) {
             Yii::$app->session->setFlash('info','Username changed');
-            return $this->render('view',[
-                                'model' => $model,
-                                'modelPassword' => $modelPassword,
-                                'modelUser' => $modelUser,
-                        ]);
+             return $this->redirect(['view']);
         } else {
-            return $this->render('view',[
-                                'model' => $model,
-                                'modelPassword' => $modelPassword,
-                                'modelUser' => $modelUser,
-                        ]);
+             return $this->redirect(['view']);
+        }
+    }
+
+    public function actionChangeSosmed()
+    {
+        $model = $this->findModel(\Yii::$app->user->identity->id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('info','Sosmed changed');
+             return $this->redirect(['view']);
+        } else {
+            return $this->redirect(['view']);
         }
     }
 
