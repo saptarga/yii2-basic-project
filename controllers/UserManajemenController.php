@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\SignupForm;
+use app\models\Profile;
 
 /**
  * UserManajemenController implements the CRUD actions for UserManajemen model.
@@ -79,13 +80,16 @@ class UserManajemenController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+                $modelProfile = new Profile();
+                $modelProfile->user_id = $user->id;
+                $modelProfile->save();
                 return $this->redirect(['index']);
             }
-        }
-
-        return $this->render('create', [
+        }else{
+            return $this->render('create', [
                 'model' => $model,
             ]);
+        }       
     }
 
     /**

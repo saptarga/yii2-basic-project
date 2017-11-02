@@ -75,9 +75,9 @@ class ProfileController extends Controller
                                         'modelUser' => $modelUser,
                 ]);
             }else{
-                $model = $this->findModel($id);
+                $model = $this->findModelUserId($id);
                     return $this->render('view',[
-                    'model' => $model,
+                        'model' => $model,
                 ]);
             }
         }else {
@@ -244,6 +244,15 @@ class ProfileController extends Controller
     protected function findModel($id)
     {
         if (($model = Profile::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findModelUserId($id)
+    {
+        if (($model = Profile::find()->where(['user_id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -221,7 +221,7 @@ $this->registerJs("
 				<div class="col-md-12">
 					<h4 class="profil danger">Delete Account</h4><hr>
 					<p>Once you delete your account, there is no going back. Please be certain.</p>
-					<?= Html::a('Delete Account', ['/user-manajemen/inactive'], ['class' => 'btn btn-danger']) ?>
+					<?= Html::a('Delete Account', ['/user-manajemen/inactive'], ['class' => 'btn btn-danger', 'id'=>'delete-account']) ?>
 				</div>
 			</div>
         </div>
