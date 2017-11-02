@@ -29,10 +29,6 @@ class ProfileController extends Controller
                     [
                         'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username','change-sosmed'],
                         'allow' => true,
-                    ],
-                    [
-                        'actions' => ['update','view','create','delete','findModel','update-pic','validate','change-password','change-username','change-sosmed'],
-                        'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
@@ -69,10 +65,21 @@ class ProfileController extends Controller
     public function actionView($id = null)
     {
         if ($id != null){
-           $model = $this->findModel($id);
-            return $this->render('view',[
-                'model' => $model,
-            ]);
+            if (RecordHelpers::userMustBeOwner('profile',$id)) { 
+                $modelPassword = new PasswordForm;
+                $model = $this->findModel(\Yii::$app->user->identity->id);
+                $modelUser = User::find()->where(['username'=>Yii::$app->user->identity->username])->one();
+                return $this->render('view',[
+                                        'model' => $model,
+                                        'modelPassword' => $modelPassword,
+                                        'modelUser' => $modelUser,
+                ]);
+            }else{
+                $model = $this->findModel($id);
+                    return $this->render('view',[
+                    'model' => $model,
+                ]);
+            }
         }else {
             $modelPassword = new PasswordForm;
             $model = $this->findModel(\Yii::$app->user->identity->id);

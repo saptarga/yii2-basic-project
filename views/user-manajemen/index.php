@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'profile' => function ($url,$model) {
                             return Html::a(
                             'Profile', 
-                             ['profile', 'id'=>$model->id], ['class' => 'btn btn-info']);
+                             ['profile/view', 'id'=>$model->id], ['class' => 'btn btn-info']);
                     },                            
                 ],
             ],

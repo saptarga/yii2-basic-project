@@ -53,7 +53,7 @@ $this->registerJs("
       <div class="widget-user-header bg-black" style="background: url('<?= $directoryAsset ?>/img/bg_profil.jpg') center center;">
       </div>
       <div class="widget-user-image">
-        <?= Html::img('@web/'.$model->pic, ['class' => 'img-circle']); ?>
+        <?= Html::img('@web/'.$model->pic.'?'.rand(1,32000), ['class' => 'img-circle']); ?>
       </div>
       <div class="box-footer">
         <div class="row">
@@ -221,7 +221,7 @@ $this->registerJs("
 				<div class="col-md-12">
 					<h4 class="profil danger">Delete Account</h4><hr>
 					<p>Once you delete your account, there is no going back. Please be certain.</p>
-					<?= Html::a('Delete Account', ['/user-manajemen/inactive', 'id'=>$model->id], ['class' => 'btn btn-danger']) ?>
+					<?= Html::a('Delete Account', ['/user-manajemen/inactive'], ['class' => 'btn btn-danger']) ?>
 				</div>
 			</div>
         </div>

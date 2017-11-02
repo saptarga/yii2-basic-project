@@ -28,10 +28,6 @@ class UserManajemenController extends Controller
                     [
                         'actions' => ['index','view','inactive','create','delete','active'],
                         'allow' => true,
-                    ],
-                    [
-                        'actions' => ['index','view','inactive','create','delete','active'],
-                        'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
@@ -110,12 +106,27 @@ class UserManajemenController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionInactive($id)
+    public function actionInactive($id = null)
     {
-        $model = $this->findModel($id);
-        $model->status = 0;
-        $model->save();
-        return $this->redirect(['index']);
+        if ($id != null){
+            $model = $this->findModel($id);
+            $model->status = 0;
+            if ($model->save()){
+                return $this->redirect(['index']);
+            }else{
+                print_r($model->getErrors());
+            }           
+        }else{
+            $model = $this->findModel(\Yii::$app->user->identity->id);
+            $model->status = 0;
+            $model->save();
+            if ($model->save()){
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('info','Account inactive');
+                return $this->goHome();
+            }
+        }
+       
     }
 
     /**
