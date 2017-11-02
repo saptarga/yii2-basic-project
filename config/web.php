@@ -56,6 +56,11 @@ $config = [
         ],
         
     ],
+    'modules' => [
+        'settings' => [
+            'class' => 'app\modules\settings\Settings',
+        ],
+    ],
     'params' => $params,
 ];
 

@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use app\models\Profile;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 /**
  * This is the model class for table "user".
  *
@@ -25,6 +27,23 @@ class UserManajemen extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'user';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 
     /**
